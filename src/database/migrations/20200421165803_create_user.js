@@ -7,8 +7,6 @@ exports.up = function(knex) {
     table.specificType('senha', 'varchar(10)').notNullable();
     table.string('nome').notNullable();
     table.string('foto');
-    table.string('nomeCartao');
-    table.integer('numCartao');
     table.string('tipo').defaultTo('usuario').notNullable();
     table.timestamp('created_at').defaultTo(knex.fn.now());
     table.timestamp('updated_at').defaultTo(knex.fn.now());
