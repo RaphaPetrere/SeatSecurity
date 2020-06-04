@@ -7,16 +7,19 @@ const routes = express.Router();
 
 
 
-routes.get('/users', UserController.get);
 routes.post('/users', UserController.create);
-routes.delete('/users/:id', UserController.delete);
+routes.get('/users', UserController.get);
 routes.put('/users', UserController.update);
+routes.delete('/users/:id', UserController.delete);
 
-routes.get('/cartoes', CartaoController.list);
 routes.post('/cartoes', CartaoController.create);
+routes.get('/cartoes', CartaoController.list);
 routes.delete('/cartoes/:numCartao', CartaoController.delete);
 
+routes.post('/locais', LocaisController.create);
 routes.get('/locais', LocaisController.list);
+routes.put('/locais', LocaisController.update);
+routes.delete('/locais/:localId', LocaisController.delete);
 
 
 

@@ -4,7 +4,6 @@ module.exports = {
     async create(request, response){
         const id = request.headers.authorization;
         const { nomeCartao, numCartao } = request.body;
-        console.log(nomeCartao == undefined);
         if(nomeCartao != undefined)
         {
             try
