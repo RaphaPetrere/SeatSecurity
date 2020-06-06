@@ -3,6 +3,7 @@ const express = require('express');
 const UserController = require('./controllers/UserController');
 const CartaoController = require('./controllers/CartaoController');
 const LocaisController = require('./controllers/LocaisController');
+const ViagemController = require('./controllers/ViagemController');
 const routes = express.Router();
 
 
@@ -21,6 +22,9 @@ routes.get('/locais', LocaisController.list);
 routes.put('/locais', LocaisController.update);
 routes.delete('/locais/:localId', LocaisController.delete);
 
+routes.post('/viagens', ViagemController.create);
+routes.get('/viagens', ViagemController.list);
+routes.delete('/viagens/:viagemId', ViagemController.delete);
 
 
 module.exports = routes;

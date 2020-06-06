@@ -84,7 +84,7 @@ module.exports = {
             return response.status(200).send();
             
         } catch {
-            return response.status(403).json({ error: 'Preencha os campos de forma correta!' });
+            return response.status(403).json({ error: 'Ocorreu erro ao executar essa função!' });
         }
         
     },
