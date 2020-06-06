@@ -7,7 +7,7 @@ exports.up = function(knex) {
       table.timestamp('data').notNullable();
       table.string('hora').notNullable();
       table.integer('qtdPessoas').notNullable();
-      table.decimal('preco',8,2).notNullable(); 
+      table.string('preco').notNullable(); 
 
       table.string('userId').notNullable();
       table.string('localId').notNullable();

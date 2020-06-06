@@ -16,10 +16,10 @@ module.exports = {
             const local = await connection('locais').where('localId', localId).first();
             const destino = local.endereco;
 
-            const precoNFormat = qtdPessoas * 100;
-            console.log(new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(preco));
+            let precoNFormat = qtdPessoas * 100;
             const preco = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(precoNFormat);
-
+            // console.log(preco);
+            
             await connection('viagens').insert({
                 origem,
                 destino,
@@ -32,8 +32,8 @@ module.exports = {
             })
 
             return response.json({text : 'Viagem cadastrada com sucesso'}); 
-        } catch {
-            return response.status(403).json({ error: 'Preencha os campos de forma correta!' });
+        } catch (err) {
+            return response.status(403).json({ error: `${err}` });
         }
     },
 
