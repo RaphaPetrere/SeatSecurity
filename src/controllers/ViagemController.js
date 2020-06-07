@@ -7,8 +7,10 @@ module.exports = {
         let ano = date.getFullYear();
         let mes = date.getMonth();
         let dia = date.getDate();
+        // let stringou = date.toString();
+        // let horarioAtual = stringou.slice(16, 24);
+        // console.log(horarioAtual);
 
-        console.log(ano, mes, dia);
         mes++;
         dia = dia.toString();
         mes = mes.toString();
@@ -16,7 +18,7 @@ module.exports = {
 
         mes = mes.length ? zero.concat(mes) : mes;
         dia = dia.length ? zero.concat(dia) : dia;
-        console.log(mes, dia);
+        // let dataCompleta = (ano + "-" + mes + "-" + dia + " ");
 
         const viagens = await connection('viagens').where('userId', userId).andWhere('data', '>', `${ano}-${mes}-${dia}`);
 

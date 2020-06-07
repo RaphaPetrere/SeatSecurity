@@ -63,7 +63,24 @@ module.exports = {
     async update(request, response){
         const id = request.headers.authorization;
         const { nome, email, senha} = request.body;
-        const dataAtual = Date();
+        const date = new Date();
+        let ano = date.getFullYear();
+        let mes = date.getMonth();
+        let dia = date.getDate();
+        let dataString = date.toString();
+        let horarioAtual = dataString.slice(16, 24);
+
+        mes++;
+        dia = dia.toString();
+        mes = mes.toString();
+        const zero = "0";
+
+        mes = mes.length ? zero.concat(mes) : mes;
+        dia = dia.length ? zero.concat(dia) : dia;
+        
+        let dataAtual = (ano + "-" + mes + "-" + dia + " ");
+        let dataCompleta = dataAtual.concat(horarioAtual);
+
         try
         {
             const users = await connection('users').where('userId', id).first();
@@ -77,7 +94,7 @@ module.exports = {
                 nome : nome,
                 email : email,
                 senha : senha,
-                updated_at : dataAtual,
+                updated_at : dataCompleta,
             });
             return response.status(200).json({message : 'Usuario atualizado com sucesso!'});
         } catch {
