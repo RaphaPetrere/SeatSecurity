@@ -3,7 +3,22 @@ const connection = require('../database/connection');
 module.exports = {
     async list(request,response){
         const { userId } = request.query;
-        const viagens = await connection('viagens').where('userId', userId)
+        const date = new Date();
+        let ano = date.getFullYear();
+        let mes = date.getMonth();
+        let dia = date.getDate();
+
+        console.log(ano, mes, dia);
+        mes++;
+        dia = dia.toString();
+        mes = mes.toString();
+        const zero = "0";
+
+        mes = mes.length ? zero.concat(mes) : mes;
+        dia = dia.length ? zero.concat(dia) : dia;
+        console.log(mes, dia);
+
+        const viagens = await connection('viagens').where('userId', userId).andWhere('data', '>', `${ano}-${mes}-${dia}`);
 
         return viagens.length == 0 ? response.json({message : "Nenhuma viagem foi encontrada!"}) : response.json(viagens);  
     },

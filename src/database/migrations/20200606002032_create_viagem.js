@@ -4,8 +4,8 @@ exports.up = function(knex) {
       table.increments('viagemId').primary();
       table.string('origem').notNullable();
       table.string('destino').notNullable();
-      table.timestamp('data').notNullable();
-      table.string('hora').notNullable();
+      table.date('data').notNullable();
+      table.time('hora').notNullable();
       table.integer('qtdPessoas').notNullable();
       table.string('preco').notNullable(); 
 
