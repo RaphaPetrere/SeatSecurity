@@ -20,7 +20,11 @@ module.exports = {
         dia = dia.length ? zero.concat(dia) : dia;
         // let dataCompleta = (ano + "-" + mes + "-" + dia + " ");
 
-        const viagens = await connection('viagens').where('userId', userId).andWhere('data', '>', `${ano}-${mes}-${dia}`);
+        const viagens = await connection('viagens')
+        .join('locais', 'locais.localId', '=', 'viagens.localId')
+        .join('users', 'users.userId', '=', 'viagens.userId')
+        .select(['viagens.*', 'locais.nome as nomeDestino', 'users.nome as nomeUsuario'])
+        .where('viagens.userId', userId).andWhere('data', '>', `${ano}-${mes}-${dia}`);
 
         return viagens.length == 0 ? response.json({message : "Nenhuma viagem foi encontrada!"}) : response.json(viagens);  
     },
