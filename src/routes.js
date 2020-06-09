@@ -1,12 +1,13 @@
 const express = require('express');
 // const connection = require('./database/connection');
+const LoginController = require('./controllers/LoginController');
 const UserController = require('./controllers/UserController');
 const CartaoController = require('./controllers/CartaoController');
 const LocaisController = require('./controllers/LocaisController');
 const ViagemController = require('./controllers/ViagemController');
 const routes = express.Router();
 
-
+routes.post('/login', LoginController.create);
 
 routes.post('/users', UserController.create);
 routes.get('/users', UserController.get);
