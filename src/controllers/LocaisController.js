@@ -5,9 +5,7 @@ module.exports = {
         const {tipo} = request.query;
         const locais = await connection('locais').where('tipo', tipo);
 
-        return locais.length == 0 ? response.json({message : "Nenhum local foi encontrado!"}) : response.json(locais);  
-    
-        // return ;
+        return locais.length == 0 ? response.json({message : "Nenhum local foi encontrado!"}) : response.json(locais);
     },
 
     async create(request, response){
@@ -54,7 +52,7 @@ module.exports = {
             }
             else
             {
-                await connection('locais').update({
+                await connection('locais').where('localId', localId).update({
                     nome : nome,
                     sigla : sigla,
                     endereco : endereco,

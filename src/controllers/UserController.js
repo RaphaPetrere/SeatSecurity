@@ -4,11 +4,10 @@ const connection = require('../database/connection');
 module.exports = {
 
     async get(request, response){
-        const {input} = request.query;
-        const users = await connection('users').where('email', input).orWhere('cpf', input).select('*').first()
+        const users = await connection('users')
         if(!users)
         {
-            return response.status(404).json({ error: 'User Not Found' });
+            return response.json({ error: 'Usuário não encontrado!', codigo : 404 });
         }
         else
         {
@@ -18,20 +17,29 @@ module.exports = {
     },
 
     async create(request, response){
-        const {email, cpf, nome, senha} = request.body;
+        const {email, cpf, nome, senha, rsenha} = request.body;
 
         const auth = crypto.randomBytes(4).toString('HEX');
 
+        if(email == ""|| cpf == ""|| nome == ""|| senha == "" || rsenha == "")
+            return response.json({error : 'Preencha os campos corretamente!', codigo: 403 });
+
         try
         {
-            const users = await connection('users').where('email', email).orWhere('cpf', cpf).select('*')
+            const users = await connection('users').where('email', email).orWhere('cpf', cpf).first();
     
-            if(users.length != 0)
+            if(users)
             {
-                return response.status(403).json({ error: 'Usuario ja existe' });
+                return response.json({ error: 'Usuario ja existe', codigo: 403 });
             }
             else
             {
+                if(senha != rsenha)
+                {
+                    // console.log(senha, rsenha);
+                    return response.json({error : 'Campos de senha não condizem!', codigo: 403 });
+                }
+
                 await connection('users').insert({
                     email,
                     cpf,
@@ -39,10 +47,11 @@ module.exports = {
                     nome,
                 });
         
-                return response.json({text : `Olá ${nome}, seja bem vindo ao SeatSecurity, ${auth}`});            
+                return response.json({message : `Conta de nome ${nome} cadastrada com sucesso!, ${auth}`, codigo: 200 });            
             }
         } catch {
-            return response.status(403).json({error : 'Ocorreu algum erro, cheque os campos e tente novamente!'});
+            // return response.status(403).json({error : 'Ocorreu algum erro, cheque os campos e tente novamente!'});
+            return response.json({error : 'Ocorreu algum erro, cheque os campos e tente novamente!', codigo: 403 });
         }
     },
 
@@ -52,7 +61,7 @@ module.exports = {
         
         if(users.userId != id)
         {
-            return response.status(404).json({ error: 'User Not Found' });
+            return response.json({ error: 'Usuário não encontrado!', codigo : 404 });
         }
 
         await connection('users').where('userId', id).delete();
@@ -61,8 +70,8 @@ module.exports = {
     },
 
     async update(request, response){
-        const id = request.headers.authorization;
-        const { nome, email, senha} = request.body;
+        // const userId = request.headers.authorization;
+        const { userId, nome, email, senha} = request.body;
         const date = new Date();
         let ano = date.getFullYear();
         let mes = date.getMonth();
@@ -80,20 +89,19 @@ module.exports = {
         
         let dataAtual = (ano + "-" + mes + "-" + dia + " ");
         let dataCompleta = dataAtual.concat(horarioAtual);
-
+        // console.log(userId, nome, email, senha)
         try
         {
-            const users = await connection('users').where('userId', id).first();
-            
-            if(users.userId != id)
+            const user = await connection('users').where('userId', userId).first();
+            if(!user)
             {
-                return response.status(404).json({ error: 'User Not Found' });
+                return response.json({ error: 'Usuário não encontrado!', codigo : 404 });
             }
     
-            await connection('users').where('userId', id).update({ 
-                nome : nome,
-                email : email,
-                senha : senha,
+            await connection('users').where('userId', userId).update({ 
+                nome : nome != "" ? nome : user.nome,
+                email : email != "" ? email : user.email,
+                senha : senha != "" ? senha: user.senha,
                 updated_at : dataCompleta,
             });
             return response.status(200).json({message : 'Usuario atualizado com sucesso!'});

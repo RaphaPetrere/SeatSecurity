@@ -2,35 +2,38 @@ const connection = require('../database/connection');
 
 module.exports = {
     async create(request, response){
-        const id = request.headers.authorization;
-        const { nomeCartao, numCartao } = request.body;
+        const { userId, nomeCartao, numCartao } = request.body;
+        if(nomeCartao == "" || numCartao == "")
+            return response.json({error : 'Preencha os campos corretamente!', codigo : 403});
+
+        // console.log(userId, nomeCartao, numCartao);
         if(nomeCartao != undefined)
         {
             try
             {
-                const cartao = await connection('cartoes').where('numCartao', numCartao);
+                const cartao = await connection('cartoes').where('numCartao', numCartao).first();
                 
                 
-                if(cartao.length != 0)
+                if(cartao)
                 {
-                    return response.status(403).json({ error: 'Cartão ja registrado' });
+                    return response.json({ error: 'Cartão ja registrado', codigo : 403 });
                 }
                 else
                 {
                     await connection('cartoes').insert({
                         numCartao,
                         nomeCartao,
-                        userId : id,
+                        userId,
                     });
-                    return response.json({text : `Cartão de número ${numCartao} cadastrado com sucesso`});
+                    return response.json({message : `Cartão de número ${numCartao} cadastrado com sucesso`});
                 }
             } catch {
-                return response.status(403).json({error : 'Ocorreu algum erro, cheque os campos e tente novamente!'});
+                return response.json({error : 'Ocorreu algum erro, cheque os campos e tente novamente!', codigo : 403});
             }
         }
         else
         {
-            return response.status(403).json({error : 'Preencha os campos corretamente!'});
+            return response.json({error : 'Preencha os campos corretamente!', codigo : 403});
         }
 
         
@@ -43,7 +46,7 @@ module.exports = {
         
         if(cartao.length == 0)
         {
-            return response.status(404).json({ error: 'Cartão Not Found' });
+            return response.json({ error: 'Cartão Não encontrado', codigo : 404 });
         }
 
         await connection('cartoes').where('userId', id).andWhere('numCartao', numCartao).delete();
