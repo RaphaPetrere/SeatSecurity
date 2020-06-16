@@ -5,6 +5,7 @@ const UserController = require('./controllers/UserController');
 const CartaoController = require('./controllers/CartaoController');
 const LocaisController = require('./controllers/LocaisController');
 const ViagemController = require('./controllers/ViagemController');
+const GerenciaController = require('./controllers/GerenciaController');
 const routes = express.Router();
 
 routes.post('/login', LoginController.post);
@@ -27,5 +28,6 @@ routes.post('/viagens', ViagemController.create);
 routes.get('/viagens', ViagemController.list);
 routes.delete('/viagens/:viagemId', ViagemController.delete);
 
+routes.get('/relatorio', GerenciaController.list);
 
 module.exports = routes;

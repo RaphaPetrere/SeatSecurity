@@ -16,9 +16,10 @@ module.exports = {
         mes = mes.toString();
         const zero = "0";
 
-        mes = mes.length ? zero.concat(mes) : mes;
-        dia = dia.length ? zero.concat(dia) : dia;
+        mes = mes.length == 1 ? zero.concat(mes) : mes;
+        dia = dia.length == 1 ? zero.concat(dia) : dia;
         // let dataCompleta = (ano + "-" + mes + "-" + dia + " ");
+        console.log(ano, mes, dia);
 
         const viagens = await connection('viagens')
         .join('locais', 'locais.localId', '=', 'viagens.localId')
