@@ -2,7 +2,7 @@ const connection = require('../database/connection');
 
 module.exports = {
     async list(request,response){
-        const { userId } = request.query;
+        const [userId] = request.headers.authorization;
         const date = new Date();
         let ano = date.getFullYear();
         let mes = date.getMonth();
@@ -20,6 +20,7 @@ module.exports = {
         dia = dia.length == 1 ? zero.concat(dia) : dia;
         // let dataCompleta = (ano + "-" + mes + "-" + dia + " ");
         console.log(ano, mes, dia);
+        console.log(userId);
 
         const viagens = await connection('viagens')
         .join('locais', 'locais.localId', '=', 'viagens.localId')
@@ -31,16 +32,22 @@ module.exports = {
     },
 
     async create(request,response){
-        const { userId, localId } = request.query;
-        const { origem, data, hora, qtdPessoas } = request.body;
+        // const [userId] = request.headers.authorization;
+        const { dadosViagem, userId } = request.body;
 
-        if(origem == "" || data == "" || hora == "" || qtdPessoas == "" )
+        let origem = dadosViagem.origem;
+        let destino = dadosViagem.destino;
+        let data = dadosViagem.data;
+        let hora = dadosViagem.hora;
+        let qtdPessoas = dadosViagem.qtdPessoas;
+        let localId = dadosViagem.localId;
+
+        console.log("Dados da viagem: ", dadosViagem);
+
+        if(origem == "" || destino == "" || data == "" || hora == "" || qtdPessoas == "" )
             return response.json({ error: "Preencha todos os campos!", codigo : 403 });
 
         try{
-            const local = await connection('locais').where('localId', localId).first();
-            const destino = local.endereco;
-
             let precoNFormat = qtdPessoas * 100;
             const preco = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(precoNFormat);
             // console.log(preco);
@@ -64,6 +71,7 @@ module.exports = {
 
     async delete(request,response){
         const {viagemId} = request.params;
+        console.log(viagemId);
         try
         {
             const viagem = await connection('viagens').where('viagemId', viagemId).first()

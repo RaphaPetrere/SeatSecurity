@@ -2,41 +2,45 @@ const connection = require('../database/connection');
 
 module.exports = {
     async list(request, response){
-        const {tipo} = request.query;
-        const locais = await connection('locais').where('tipo', tipo);
-
-        return locais.length == 0 ? response.json({message : "Nenhum local foi encontrado!"}) : response.json(locais);
-    },
-
-    async create(request, response){
-
-        const {nome, sigla, endereco, cidadeUF, tipo} = request.body;
-
-        try
+        const {tipo} = request.body;
+        console.log("tipo: ", tipo);
+        if(tipo)
         {
-            const local = await connection('locais').where('nome', nome).first();
-
-            if(local)
-            {
-                return response.status(403).json({ error: 'Local ja registrado' });
-            }
-            else
-            {
-                await connection('locais').insert({
-                    nome,
-                    sigla,
-                    endereco,
-                    cidadeUF,
-                    tipo
-                });
-        
-                return response.json({text : `Local ${nome} cadastrado com sucesso`}); 
-            }
-        } catch {
-            return response.status(403).json({ error: 'Preencha os campos de forma correta!' });
+            const locais = await connection('locais').where('tipo', tipo);
+            return locais.length == 0 ? response.json({message : "Nenhum local foi encontrado!"}) : response.json(locais);
         }
 
     },
+
+    // async create(request, response){
+
+    //     const {nome, sigla, endereco, cidadeUF, tipo} = request.body;
+
+    //     try
+    //     {
+    //         const local = await connection('locais').where('nome', nome).first();
+
+    //         if(local)
+    //         {
+    //             return response.status(403).json({ error: 'Local ja registrado' });
+    //         }
+    //         else
+    //         {
+    //             await connection('locais').insert({
+    //                 nome,
+    //                 sigla,
+    //                 endereco,
+    //                 cidadeUF,
+    //                 tipo
+    //             });
+        
+    //             return response.json({text : `Local ${nome} cadastrado com sucesso`}); 
+    //         }
+    //     } catch {
+    //         return response.status(403).json({ error: 'Preencha os campos de forma correta!' });
+    //     }
+
+    // },
 
     async update(request,response){
         const {nome, sigla, endereco, cidadeUF, tipo} = request.body;

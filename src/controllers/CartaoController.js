@@ -6,7 +6,7 @@ module.exports = {
         if(nomeCartao == "" || numCartao == "")
             return response.json({error : 'Preencha os campos corretamente!', codigo : 403});
 
-        // console.log(userId, nomeCartao, numCartao);
+        console.log("USERID: " + userId, "Nome: " + nomeCartao, "Numero: ", numCartao);
         if(nomeCartao != undefined)
         {
             try
@@ -55,7 +55,8 @@ module.exports = {
     },
 
     async list(request, response){
-        const {userId} = request.query;
+        const [userId] = request.headers.authorization;
+        console.log(userId);
         const cartoes = await connection('cartoes').where('userId', userId);
     
         return response.json(cartoes);
