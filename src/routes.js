@@ -8,6 +8,9 @@ const ViagemController = require('./controllers/ViagemController');
 const GerenciaController = require('./controllers/GerenciaController');
 const UltimasController = require('./controllers/UltimasController');
 const BookedController = require('./controllers/BookedController');
+const FeedbackController = require('./controllers/FeedbackController');
+const RequisitarSenhaController = require('./controllers/RequisitarSenhaController');
+const PassagemController = require('./controllers/PassagemController');
 
 const routes = express.Router();
 
@@ -35,5 +38,11 @@ routes.post('/relatorio', GerenciaController.list);
 
 routes.get('/ultimasViagens', UltimasController.list);
 routes.post('/booked', BookedController.list);
+
+routes.post('/feedback', FeedbackController.create);
+
+routes.post('/esqueciSenha', RequisitarSenhaController.create);
+
+routes.post('/passagem', PassagemController.create);
 
 module.exports = routes;
