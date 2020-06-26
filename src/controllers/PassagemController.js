@@ -12,8 +12,8 @@ module.exports = {
             port: 465,
             secure: true,
             auth: {
-                user: "carrinhovirtual2019@gmail.com",
-                pass: "carrinho2019"
+                user: "contatoseats@gmail.com",
+                pass: "SeatSecurity123"
             }
         });
         const viagem = await connection('viagens')
@@ -25,8 +25,8 @@ module.exports = {
         try
         {
             transporter.sendMail({
-                from: "Raffa Moreira Mano <carrinhovirtual2019@gmail.com>",
-                to: "carrinhovirtual2019@gmail.com",
+                from: "Seat Security <contatoseats@gmail.com>",
+                to: "contatoseats@gmail.com",
                 subject : "Passagem por email",
                 text : `Olá ${viagem.nomeUsuario}, segue os detalhes da sua proxima viagem: 
                 Origem : ${viagem.origem}

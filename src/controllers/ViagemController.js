@@ -26,7 +26,7 @@ module.exports = {
         .join('locais', 'locais.localId', '=', 'viagens.localId')
         .join('users', 'users.userId', '=', 'viagens.userId')
         .select(['viagens.*', 'locais.nome as nomeDestino', 'users.nome as nomeUsuario'])
-        .where('viagens.userId', userId).andWhere('data', '>', `${ano}-${mes}-${dia}`);
+        .where('viagens.userId', userId).andWhere('data', '>=', `${ano}-${mes}-${dia}`);
 
         return viagens.length == 0 ? response.json({error : "Nenhuma viagem foi encontrada!", codigo : 404}) : response.json(viagens);  
     },

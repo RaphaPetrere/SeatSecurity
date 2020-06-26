@@ -14,14 +14,14 @@ module.exports = {
             port: 465,
             secure: true,
             auth: {
-                user: "carrinhovirtual2019@gmail.com",
-                pass: "carrinho2019"
+                user: "contatoseats@gmail.com",
+                pass: "SeatSecurity123"
             }
         });
         try
         {
             transporter.sendMail({
-                from: "Seat Security <carrinhovirtual2019@gmail.com>",
+                from: "Seat Security <contatoseats@gmail.com>",
                 to: email,
                 subject : "Esqueci minha Senha",
                 text : `Olá ${email}, vimos que você solicitou a troca de senha, esta é a sua nova senha: ${cryptoSenha}`,

@@ -12,14 +12,14 @@ module.exports = {
             port: 465,
             secure: true,
             auth: {
-                user: "carrinhovirtual2019@gmail.com",
-                pass: "carrinho2019"
+                user: "contatoseats@gmail.com",
+                pass: "SeatSecurity123"
             }
         });
         try
         {
             transporter.sendMail({
-                from: "Raffa Moreira Mano <carrinhovirtual2019@gmail.com>",
+                from: "Seat Security <contatoseats@gmail.com>",
                 to: "miguelmorais.mcm@gmail.com, milenafranco10@gmail.com",
                 subject,
                 text,
