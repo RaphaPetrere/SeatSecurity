@@ -4,7 +4,7 @@ import Calendar from 'react-calendar';
 import './index.scss';
 import logo from '../../../assets/cadeadoBrancoFechado.png';
 // import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import 'react-calendar/dist/Calendar.css';
 import { FiArrowLeft } from 'react-icons/fi'; 
 
@@ -17,7 +17,7 @@ import { FiArrowLeft } from 'react-icons/fi';
   }
  
   onChange = date => this.setState({ date })
-  onClick = async(date) => {
+  onClick = date => {
 
     let dadosViagem = JSON.parse(localStorage.getItem('dadosViagem'));
 
@@ -25,7 +25,7 @@ import { FiArrowLeft } from 'react-icons/fi';
     // let origem = params.get("origem"); 
     // let destino = params.get("destino");
     // let localId = params.get("localId");
-    const history = useHistory();
+    // const history = useHistory();
 
     let dataPre = date.toString().slice(4,15);
     console.log(dataPre);
@@ -88,8 +88,8 @@ import { FiArrowLeft } from 'react-icons/fi';
     //   qtdPessoas : null,
     //   localId,
     // }
-    await localStorage.setItem('dadosViagem', JSON.stringify(dadosViagem))
-    history.push(`/travel/third-step?origem=${dadosViagem.origem}&destino=${dadosViagem.destino}&data=${dadosViagem.data}`)
+    localStorage.setItem('dadosViagem', JSON.stringify(dadosViagem))
+    window.location.href=`https://seatsecurity-frontend.herokuapp.com/travel/third-step?origem=${dadosViagem.origem}&destino=${dadosViagem.destino}&data=${dadosViagem.data}`
   }
  
   render() {
