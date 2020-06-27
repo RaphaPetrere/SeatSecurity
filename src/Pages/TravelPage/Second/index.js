@@ -4,7 +4,7 @@ import Calendar from 'react-calendar';
 import './index.scss';
 import logo from '../../../assets/cadeadoBrancoFechado.png';
 // import { useForm } from "react-hook-form";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import 'react-calendar/dist/Calendar.css';
 import { FiArrowLeft } from 'react-icons/fi'; 
 
@@ -25,6 +25,7 @@ import { FiArrowLeft } from 'react-icons/fi';
     // let origem = params.get("origem"); 
     // let destino = params.get("destino");
     // let localId = params.get("localId");
+    const history = useHistory();
 
     let dataPre = date.toString().slice(4,15);
     console.log(dataPre);
@@ -88,7 +89,7 @@ import { FiArrowLeft } from 'react-icons/fi';
     //   localId,
     // }
     await localStorage.setItem('dadosViagem', JSON.stringify(dadosViagem))
-    window.location.href=`http://localhost:3000/travel/third-step?origem=${dadosViagem.origem}&destino=${dadosViagem.destino}&data=${dadosViagem.data}`
+    history.push(`/travel/third-step?origem=${dadosViagem.origem}&destino=${dadosViagem.destino}&data=${dadosViagem.data}`)
   }
  
   render() {
