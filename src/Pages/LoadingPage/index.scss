@@ -1,0 +1,22 @@
+.loading{
+  &-page{
+    background-color: var(--main-color);
+    width: auto;
+    height: 100vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  &-text{
+    font-size: 50px;
+  }
+
+  &-logo{
+    width: 200px;
+  }
+}
+
+

@@ -1,0 +1,130 @@
+.main{
+    &-page{
+      position: relative;
+      background-color: white;
+      width: auto;
+      height: 100vh;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      &-content{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 70%;
+        justify-content: space-between;
+      }
+    }
+
+    &-header{
+      top: 0;
+      position: absolute;
+      background-color: var(--main-color);
+      width: 100%;
+      height: 90px;
+      z-index: 1;
+      &-back{
+          position: absolute;
+          left: 15px;
+          text-decoration: none;
+          color: white;
+      }
+      &-logo--container{
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          position: absolute;
+          left: 15px;
+      }
+      &-content{
+          color: white;
+          // border-bottom: 4px solid gray;
+          font-size: 20px;
+          display: flex;
+          position: relative;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+          box-shadow: 0px 3px 5px black;
+      }
+  }
+  
+  
+    &-profile-picture{
+      width: 60px;
+      border: 1px solid transparent;
+      border-radius: 100%;
+    }
+
+    &-btn-container{
+        height: 100%;
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
+    &-forgot-password{
+        text-decoration: underline;
+        font-size: 17px;
+    }
+
+    &-btn{
+        &--travel, &--booked-trips, &--last-trips{
+            padding: 25px 15px;
+            text-align: left;
+            text-decoration: unset;
+            width: 100%;
+            color: white;
+            font-size: 20px;
+            background-color: var(--main-color);
+            border-radius: 7px;
+            border: 1px solid transparent;
+            box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2), 0px 1px 18px rgba(0, 0, 0, 0.12), 0px 6px 10px rgba(0, 0, 0, 0.14);
+        }
+        &-content{
+          width: 100%;
+          display: flex;
+          position: relative;
+          flex-direction: row;
+          align-items: center;
+          .main{
+            &-travel--icon, &-notebook--icon, &-clock--icon{
+              width: 50px;
+              position: absolute;
+              right: 3px;
+            }
+          }
+        }
+    }
+
+    &-footer{
+      width: 100%;
+      bottom: 0;
+      position: absolute;
+      height: 90px;
+      background: var(--gray);
+      &-content{
+        height: 100%;
+      }
+      &-container{
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-evenly;
+      }
+      &--text{
+        font-weight: 700;
+      }
+      &--copyright{
+        font-size: 13px;
+      }
+    }
+  }
+  
+  
+  

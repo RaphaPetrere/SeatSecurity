@@ -1,0 +1,78 @@
+.desk{
+  &-home{
+    &-page{
+      background-color: var(--main-color);
+    }
+    &-logo-container{
+      display: flex;
+      height: 100vh;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      span{
+        font-size: 20px;
+        color: white;
+        margin-top: 40px;
+      }
+    }
+  }
+}
+
+.home{
+    &-page{
+      background-color: white;
+      width: auto;
+      height: 100vh;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      &-content{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 70%;
+        justify-content: space-between;
+      }
+    }
+  
+    &-logo{
+      width: 160px;
+    }
+
+    &-btn-container{
+        height: 100%;
+        width: 65%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
+    &-forgot-password{
+        text-decoration: underline;
+        font-size: 17px;
+        color: black;
+    }
+
+    &-btn{
+        &--login, &--signup{
+            padding: 15px;
+            color: white;
+            font-size: 18px;
+            text-decoration: unset;
+            text-transform: uppercase;
+            background-color: var(--main-color);
+            border-radius: 7px;
+            border: 1px solid transparent;
+            box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2), 0px 1px 18px rgba(0, 0, 0, 0.12), 0px 6px 10px rgba(0, 0, 0, 0.14);
+        }
+        
+    }
+    
+  }
+  
+  
+  
