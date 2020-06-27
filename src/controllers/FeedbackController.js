@@ -20,7 +20,7 @@ module.exports = {
         {
             transporter.sendMail({
                 from: "Seat Security <contatoseats@gmail.com>",
-                to: "miguelmorais.mcm@gmail.com, milenafranco10@gmail.com",
+                to: "contatoseats@gmail.com",
                 subject,
                 text,
             }).then(message => {
