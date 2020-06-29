@@ -13,7 +13,7 @@ import { FiArrowLeft } from 'react-icons/fi';
  // tem que fazer verificação nos botões, se nao houve digitado nada na origem, n pode prosseguir
  class CalendarComponent extends Component {
   state = {
-    date: new Date(),
+    date: new Date((new Date()).valueOf() + 1000*3600*24),
   }
  
   onChange = date => this.setState({ date })
@@ -90,6 +90,7 @@ import { FiArrowLeft } from 'react-icons/fi';
     // }
     localStorage.setItem('dadosViagem', JSON.stringify(dadosViagem))
     window.location.href=`https://seatsecurity-frontend.herokuapp.com/travel/third-step?origem=${dadosViagem.origem}&destino=${dadosViagem.destino}&data=${dadosViagem.data}`
+    // window.location.href=`http://localhost:3000/travel/third-step?origem=${dadosViagem.origem}&destino=${dadosViagem.destino}&data=${dadosViagem.data}`
   }
  
   render() {
@@ -99,7 +100,8 @@ import { FiArrowLeft } from 'react-icons/fi';
           onChange={this.onChange}
           value={this.state.date}
           calendarType={'US'}
-          minDate={new Date()}
+          minDate={new Date((new Date()).valueOf() + 1000*3600*24)}
+          //pega amanhã como dia minimo
           onClickDay={this.onClick}
         />
       </div>
@@ -185,7 +187,7 @@ function TravelPage() {
                 </a>
                 <div className="second-step-header-logo--container">
                     <img src={logo} className="second-step-logo" alt="logo" /> 
-                    <span>/ Realizar Viagem</span>
+                    <span>/ Agendar Viagem</span>
                 </div>
             </div>
         </header>

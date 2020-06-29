@@ -3,7 +3,7 @@ import api from '../../../../services/api';
 import './index.scss';
 import Logo from '../../../../assets/cadeadoBrancoFechado.png';
 import CardImage from '../../../../assets/creditCard2.png';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { FiArrowLeft, FiCheck } from 'react-icons/fi'; 
 
 function CardPick() {
@@ -12,10 +12,8 @@ function CardPick() {
   let userId = user.userId;
 
   useEffect(() => {
-    api.get('cartoes', {
-      headers : {
-        Authorization : userId,
-      }
+    api.put('cartoes', {
+      userId
     }).then(response => {
       setCartoes(response.data);
     })
@@ -36,7 +34,7 @@ function CardPick() {
       
       history.push('/home'); //aqui ele redireciona pra tela principal
       console.log(response.data);
-      alert(`Viagem para ${dadosViagem.destino} realizada com sucesso!`);
+      alert(`Viagem para ${dadosViagem.destino} agendada com sucesso!`);
     } catch (err) {
       alert('Falha no registro, tente novamente!');
     }
@@ -66,7 +64,7 @@ function CardPick() {
                                     <strong style={{color:"white"}}>****{(cartao.numCartao).toString().slice(12)}</strong>
                                     <button className="card-pick-select--button" onClick={() => handleSelectCartao()}><FiCheck className="card-pick-select" size={32} color="white" /></button>
                                     </div>
-                )):<div><strong>Registre um cartão para efetuar a viagem!</strong></div>}                
+                )):<div style={{marginBottom: "20px"}}><Link to="/manage-cards">Registre um cartão para efetuar a viagem!</Link></div>}                
                 {/* pra cada cartao, ele vai retornar esse JSX */}
             </div>
         </div>

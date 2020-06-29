@@ -30,8 +30,8 @@ let tipo = params.get("tipo");
                 {tipo === "usuario" ? 
                 <div className="main-btn-container">
                     <div className="main-btn-content">
-                        <a href="/travel" className="main-btn--travel">Realizar uma viagem</a>
-                        <img src={TravelIcon} className="main-travel--icon" alt="realizar viagem" /> 
+                        <a href="/travel" className="main-btn--travel">Agendar uma viagem</a>
+                        <img src={TravelIcon} className="main-travel--icon" alt="agendar viagem" /> 
                     </div>
                     <div className="main-btn-content">
                         <a href="/last-trips" className="main-btn--last-trips">Ver ultimas viagens</a>
@@ -56,7 +56,7 @@ let tipo = params.get("tipo");
                 {user.tipo === "usuario" ? 
                 <div className="main-btn-container">
                     <div className="main-btn-content">
-                        <a href="/travel" className="main-btn--travel">Realizar uma viagem</a>
+                        <a href="/travel" className="main-btn--travel">Agendar uma viagem</a>
                         <img src={TravelIcon} className="main-travel--icon" alt="realizar viagem" /> 
                     </div>
                     <div className="main-btn-content">
@@ -84,7 +84,7 @@ let tipo = params.get("tipo");
                 <div className="main-footer-container">
                     <span className="main-footer--text">SeatSecurity</span>
                     <span className="main-footer--copyright">Em caso de dúvidas ou problemas:</span>
-                    <span className="main-footer--copyright">seatsecurity@gmail.com</span>
+                    <span className="main-footer--copyright">contatoseats@gmail.com</span>
                 </div>
             </div>
         </footer>

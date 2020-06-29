@@ -11,10 +11,8 @@ function BookedTripsPage() {
     console.log("UserId", userId)
 
     useEffect(() => {
-      api.get('viagens', {
-        headers : {
-          Authorization : userId,
-        }
+      api.put('viagens', {
+        userId
       }).then(response => {
         setViagens(response.data);
         console.log(response.data);

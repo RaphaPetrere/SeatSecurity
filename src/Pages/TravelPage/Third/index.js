@@ -72,7 +72,7 @@ function TravelPage() {
   async function handleTravel(e) {
     e.preventDefault();
 
-    dadosViagem.preco = (qtdPessoas * 100);
+    dadosViagem.preco = dadosViagem.preco + (qtdPessoas * 10);
     dadosViagem.qtdPessoas = qtdPessoas;
     dadosViagem.hora = hora;
     localStorage.setItem('dadosViagem', JSON.stringify(dadosViagem));
@@ -115,7 +115,7 @@ function TravelPage() {
                 </a>
                 <div className="third-step-header-logo--container">
                     <img src={logo} className="third-step-logo" alt="logo" /> 
-                    <span>/ Realizar Viagem</span>
+                    <span>/ Agendar Viagem</span>
                 </div>
             </div>
         </header>
@@ -136,7 +136,7 @@ function TravelPage() {
                   <input name="destination" className="third-step-label--input" type="text" ref={register({ required: true })} value={dadosViagem.destino} />
                   {errors.destination && <span className="third-step-label-error">Campo Obrigatório</span>}
 
-                  <label className="third-step-label">Escolha data e horário:</label>
+                  <label className="third-step-label">Escolha data e horário de saída:</label>
                   <div>
                   <input name="date" className="third-step-label--input" type="text" ref={register({ required: true })} value={dadosViagem.data} />
                   {errors.date && <span className="third-step-label-error">Campo Obrigatório</span>}
@@ -148,11 +148,16 @@ function TravelPage() {
                   <label className="third-step-label">Quantas pessoas irão?</label>
                   <input name="qtdPessoas" className="third-step-label--input" type="number" min="5" ref={register({ required: true })} value={qtdPessoas} onChange={e => setPeople(e.target.value)} />
                   {errors.qtdPessoas && <span className="third-step-label-error">Campo Obrigatório</span>}
+                  {qtdPessoas < 5 ? 
+                    <span style={{fontSize:"12px", color:"red"}}>*Quantidade minima 5</span>                  
+                  : 
+                    <div></div>
+                  }
                 </label>
                 <div className="third-step-destination-container">
-                    <span className="third-step-destination-text">Preço:</span>
+                    <span className="third-step-destination-text">Preço estimado:</span>
                     {qtdPessoas !== "" ? 
-                      <span className="third-step-destination-price">R$ {qtdPessoas * 100},00</span>
+                      <span className="third-step-destination-price">R$ {dadosViagem.preco + (qtdPessoas * 10)},00</span>
                     : 
                       <span className="third-step-destination-price">R$ 0,00</span>
                     }

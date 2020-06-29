@@ -70,7 +70,7 @@ function SeeDetails() {
                     
                   </td>
                   <td className="details-table-line">
-                      <span className="details-table-price">R$</span>
+                      <span className="details-table-price">R$*</span>
                   </td>
               </tr>
               
@@ -90,6 +90,7 @@ function SeeDetails() {
               </tr>
 
             </table>
+            <span style={{fontSize:"12px"}}>*Valor estimado</span>
             {/* <div className="details-QR-container">
                 <div className="details-QR-container">
                     <QRCode value="http://facebook.github.io/react/" />

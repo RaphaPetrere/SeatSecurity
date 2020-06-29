@@ -11,6 +11,8 @@ import { FiArrowLeft } from 'react-icons/fi';
 function CardForm() {
     const [ numCartao, setNumcartao ] = useState('');
     const [ nomeCartao, setNomecartao ] = useState('');
+    const [ cvv, setCvv ] = useState('');
+    const [ validadeInicial, setValidade ] = useState('');
 
     const history = useHistory();
     
@@ -22,8 +24,12 @@ function CardForm() {
       let userId = user.userId;
       console.log(userId)
 
+      let validade = validadeInicial.replace('_','/');
+      console.log(typeof(validade));
+      console.log(typeof(parseInt(cvv)));
+
       try {
-        const response = await api.post('cartoes', { userId, numCartao, nomeCartao });
+        const response = await api.post('cartoes', { userId, nomeCartao, numCartao, cvv, validade });
         if(response.data.codigo !== 200 && response.data.codigo !== undefined)
         {
           alert(response.data.error)
@@ -61,8 +67,10 @@ function CardForm() {
             <input name="cardsName" className="manage-cards-label--input" type="text" ref={register({ required: true })} value={nomeCartao} onChange={e => setNomecartao(e.target.value)}/>
             {errors.cardsName && <span className="manage-cards-label-error">Campo Obrigatório</span>}
 
-            <label className="manage-cards-label">CVV</label>
+            <label className="manage-cards-label">cvv</label>
             <input name="cardsCVV" className="manage-cards-label--input" type="number" 
+            value={cvv} 
+            onChange={e => setCvv(e.target.value)}
             ref={register({ 
             required: "Campo obrigatório",
             maxLength: {
@@ -75,6 +83,23 @@ function CardForm() {
             }
             })} />
             <ErrorMessage errors={errors} name="cardsCVV">
+                {({ messages }) =>
+                messages &&
+                Object.entries(messages).map(([type, message]) => (
+                    <p className="manage-cards-label-error" key={type}>{message}</p>
+                ))
+                }
+            </ErrorMessage>
+
+            <label className="manage-cards-label">Data de válidade</label>
+            <label style={{fontSize:"12px"}}>colocar mes_ano (exemplo: 01_21)</label>
+            <input name="validade" className="manage-cards-label--input" type="text" 
+            value={validadeInicial} 
+            onChange={e => setValidade(e.target.value)}
+            ref={register({ 
+            required: "Campo obrigatório",
+            })} />
+            <ErrorMessage errors={errors} name="validade">
                 {({ messages }) =>
                 messages &&
                 Object.entries(messages).map(([type, message]) => (
@@ -97,10 +122,8 @@ function ManageCards() {
   let userId = user.userId;
 
   useEffect(() => {
-    api.get('cartoes', {
-      headers : {
-        Authorization : userId,
-      }
+    api.put('cartoes', {
+      userId
     }).then(response => {
       setCartoes(response.data);
     })
@@ -156,7 +179,7 @@ function ManageCards() {
                     <button className="manage-cards-delete--button"><img src={Minus} className="manage-cards-delete" alt="delete" /></button>
                 </div> */}
               {cartoes.length !== 0 ? cartoes.map(cartao => (
-                                    <div className="manage-cards-card">
+                                    <div className="manage-cards-card" key={cartao.numCartao}>
                                     <img src={CardImage} className="manage-cards-card-image" alt="card" /> 
                                     <strong>{cartao.numCartao}</strong>
                                     <button className="manage-cards-delete--button" ><img src={Minus} className="manage-cards-delete" alt="delete" onClick={() => handleDeleteCartao(cartao.numCartao)}/></button>

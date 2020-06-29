@@ -109,6 +109,11 @@ function TravelPage() {
     })
   }, [tipo]);
 
+  function atualizaDados(local) {
+    dadosViagem.preco = local.preco;
+    localStorage.setItem('dadosViagem', JSON.stringify(dadosViagem))
+  };
+
   return (
     <div className="first-step-page">
         <header className="first-step-header">
@@ -118,7 +123,7 @@ function TravelPage() {
                 </a>
                 <div className="first-step-header-logo--container">
                     <img src={logo} className="first-step-logo" alt="logo" /> 
-                    <span>/ Realizar Viagem</span>
+                    <span>/ Agendar Viagem</span>
                 </div>
             </div>
         </header>
@@ -133,18 +138,8 @@ function TravelPage() {
                 <span className="first-step-destination-text">Escolha o destino:</span>
             </div>
             <div className="first-step-btn-container">
-                {/* <div className="first-step-btn-content">
-                    <button type="submit" className="first-step-btn--destination">
-                    Aeroporto Internacional de Guarulhos (GRU)
-                    </button> 
-                </div>
-                <div className="first-step-btn-content">
-                    <a href="/travel/second-step" className="first-step-btn--destination">
-                      Aeroporto de São Paulo / Congonhas
-                    </a>
-                </div> */}
                 {locais.length ? locais.map(local => (
-                    <a href={`/travel/second-step?destino=${local.nome}&origem=${origem}&localId=${local.localId}`} className="first-step-btn--destination">
+                    <a href={`/travel/second-step?destino=${local.nome}&origem=${origem}&localId=${local.localId}`} onClick={() => atualizaDados(local)} className="first-step-btn--destination">
                       {local.nome}
                     </a> 
                 )):

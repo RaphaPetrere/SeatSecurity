@@ -61,7 +61,7 @@ function TravelPage() {
                   </a>
                   <div className="travel-header-logo--container">
                       <img src={logo} className="travel-logo" alt="logo" /> 
-                      <span>/ Realizar Viagem</span>
+                      <span>/ Agendar Viagem</span>
                   </div>
               </div>
           </header>
