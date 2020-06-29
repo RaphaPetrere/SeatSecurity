@@ -77,7 +77,7 @@ function FeedbackPage() {
                 <FeedbackForm />
             </div>
         </div>
-        <footer className="feedback-footer">
+        {/* <footer className="feedback-footer">
             <div className="feedback-footer-content">
                 <div className="feedback-footer-container">
                     <span className="feedback-footer--text">SeatSecurity</span>
@@ -85,7 +85,7 @@ function FeedbackPage() {
                     <span className="feedback-footer--copyright">seatsecurity@gmail.com</span>
                 </div>
             </div>
-        </footer>
+        </footer> */}
     </div>
   );
 }

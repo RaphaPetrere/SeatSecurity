@@ -22,11 +22,37 @@ function CardForm() {
   
       let user = JSON.parse(localStorage.getItem('user'));
       let userId = user.userId;
-      console.log(userId)
+      console.log("UserID: ", userId);
 
-      let validade = validadeInicial.replace('_','/');
+      const date = new Date();
+      let ano = date.getFullYear();
+      let mes = date.getMonth();
+
+      ano = ano.toString();
+      mes = mes.toString();
+
+      const zero = "0";
+
+      mes = mes.length === 1 ? zero.concat(mes) : mes;
+      ano = ano.slice(2,4)
+
+      let validadeAtual = mes.concat('/'.concat(ano));
+
+      let validade = validadeInicial.replace(/\W|_/,'/');
       console.log(typeof(validade));
       console.log(typeof(parseInt(cvv)));
+
+      if(numCartao.length !== 16)
+      {
+        alert("O número do cartão deve conter 16 caracteres");
+        return;
+      }
+
+      if(validade <= validadeAtual)
+      {
+        alert("Entrar com uma válidade valida");
+        return;
+      }
 
       try {
         const response = await api.post('cartoes', { userId, nomeCartao, numCartao, cvv, validade });
@@ -57,7 +83,17 @@ function CardForm() {
                 name="cardsNumber" 
                 className="manage-cards-label--input" 
                 type="number" 
-                ref={register({ required: true})}
+                ref={register({ 
+                  required: true,
+                  maxLength: {
+                    value: 16,
+                    message: "Tamanho máximo de 16 digitos"
+                  },
+                  minLength: {
+                    value: 16,
+                    message: "Tamanho mínimo de 16 digitos"
+                  }
+                })}
                 value={numCartao} 
                 onChange={e => setNumcartao(e.target.value)}
             />
@@ -74,12 +110,12 @@ function CardForm() {
             ref={register({ 
             required: "Campo obrigatório",
             maxLength: {
-                value: 3,
-                message: "Tamanho máximo de 3 digitos"
+              value: 3,
+              message: "Tamanho máximo de 3 digitos"
             },
             minLength: {
-                value: 3,
-                message: "Tamanho mínimo de 3 digitos"
+              value: 3,
+              message: "Tamanho mínimo de 3 digitos"
             }
             })} />
             <ErrorMessage errors={errors} name="cardsCVV">
@@ -98,6 +134,14 @@ function CardForm() {
             onChange={e => setValidade(e.target.value)}
             ref={register({ 
             required: "Campo obrigatório",
+            maxLength: {
+              value: 5,
+              message: "Tamanho máximo de 5 digitos"
+            },
+              minLength: {
+              value: 5,
+              message: "Tamanho mínimo de 5 digitos"
+            }
             })} />
             <ErrorMessage errors={errors} name="validade">
                 {({ messages }) =>
@@ -132,9 +176,7 @@ function ManageCards() {
   async function handleDeleteCartao(numCartao) {
     try {
         await api.delete(`cartoes/${numCartao}`, {
-          headers : {
-              Authorization : userId,
-          }
+          userId
       });
 
         setCartoes(cartoes.filter(cartao => cartao.numCartao !== numCartao));

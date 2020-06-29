@@ -111,7 +111,7 @@ function TravelPage() {
                   </div>
               </div>
           </div>
-          <footer className="travel-footer">
+          {/* <footer className="travel-footer">
               <div className="travel-footer-content">
                   <div className="travel-footer-container">
                       <span className="travel-footer--text">SeatSecurity</span>
@@ -119,7 +119,7 @@ function TravelPage() {
                       <span className="travel-footer--copyright">seatsecurity@gmail.com</span>
                   </div>
               </div>
-          </footer>
+          </footer> */}
       </div>
     </form>
   );
