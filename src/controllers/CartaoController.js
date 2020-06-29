@@ -20,7 +20,7 @@ module.exports = {
                 }
                 else
                 {
-                    if(cvv.length != 3 || validade.length != 5)
+                    if(cvv.length != 3 || validade.length != 5 || numCartao.length != 16)
                     {
                         return response.json({ error : 'Colocar dados no tamanho requerido!', codigo : 403})
                     }
@@ -48,16 +48,16 @@ module.exports = {
 
     async delete(request, response){
         const {numCartao} = request.params;
-        const id = request.headers.authorization;
+        const id = request.body;
         const cartao = await connection('cartoes').where('userId', id).andWhere('numCartao', numCartao);
         
         if(cartao.length == 0)
         {
             return response.json({ error: 'Cartão Não encontrado', codigo : 404 });
         }
-
+        console.log("cartão removido com sucesso!");
         await connection('cartoes').where('userId', id).andWhere('numCartao', numCartao).delete();
-        return response.status(200).send();
+        return response.json({message : 'Cartão removido com sucesso!', codigo : 200});
         
     },
 
