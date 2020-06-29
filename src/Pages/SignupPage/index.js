@@ -42,6 +42,12 @@ function SignupForm() {
     let cpfFilter = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
     let cpfResult = cpfFilter.test(cpf);
     console.log("Resultado: ", cpfResult);
+    if(!cpfResult)
+    {
+      alert("Erro ao cadastrar, tente novamente!");
+      return;
+    }
+
     let senhaValidada = validarSenha(senha);
     if(senhaValidada)
     {
@@ -54,9 +60,9 @@ function SignupForm() {
         }
         
         history.push('/login');
-        console.log(response.data.message);
+        alert(response.data.message);
       } catch (err) {
-        alert("Erro no cadastro do usuário, tente novamente!");
+        alert("Erro ao cadastrar, tente novamente!");
       }
     }
     else

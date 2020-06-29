@@ -12,6 +12,27 @@ const [ email, setEmail ] = useState('');
 const [ senha, setSenha ] = useState('');
 let user = JSON.parse(localStorage.getItem('user'));
 
+function validarSenha(senha){
+
+  if(senha.length === 0 || senha.match(/\W|_/)){
+      console.log('senha invalida1');
+      return false;
+  } 
+
+  var numeros = senha.match(/\d/g) ? senha.match(/\d/g).length : 0;
+  var letras = senha.match(/[a-zA-Z]/g) ? senha.match(/[a-zA-Z]/g).length : 0;
+  var totalCaracteresValidos = numeros + letras;
+
+
+  if(totalCaracteresValidos >= 6 && totalCaracteresValidos <= 10 && numeros >= 1 && !senha.match(/\W|_/)){
+     console.log('senha valida');
+     return true;
+  }else{
+     console.log('senha invalida2');
+     return false;
+  }
+}
+
 async function handleUpdateUser(e) {
   e.preventDefault();
 
@@ -19,6 +40,13 @@ async function handleUpdateUser(e) {
   try {
     console.log(user.userId);
     let userId = user.userId;
+    let senhaValidada = validarSenha(senha);
+    if(!senhaValidada)
+    {
+      alert("Erro ao atualizar!");
+      return;
+    }
+    
     const response = await api.put('users', { userId, nome, email, senha });
     if(response.data.codigo !== 200 && response.data.codigo !== undefined)
     {

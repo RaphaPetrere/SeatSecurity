@@ -203,7 +203,7 @@ function TravelPage() {
               </label>
             </div>
             <div className="second-step-destination-container">
-                <span className="second-step-destination-text">Escolha data e horário:</span>
+                <span className="second-step-destination-text">Escolha data:</span>
             </div>
             <div className="second-step-btn-container">
                 <CalendarComponent/>

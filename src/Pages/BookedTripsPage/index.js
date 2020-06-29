@@ -53,26 +53,8 @@ function BookedTripsPage() {
                             </div>
                         </div>
                 )):<div>
-                    <strong>Nenhuma Viagem encontrada</strong>
+                    <strong>{viagens.error}</strong>
                   </div>} 
-                {/* <div className="booked-trips-date-container">
-                    <span className="booked-trips--date">08/06/2020</span>
-                    <span className="booked-trips--hours">12:00</span>
-                </div>
-                <span className="booked-trips--street">Rua KARD, 13</span>
-                <div className="booked-trips-see-details">
-                    <a href="/booked-trips/see-details" className="booked-trips-see-details--button">Ver detalhes</a>
-                </div> */}
-            {/* <div className="booked-trips--trip">
-                <div className="booked-trips-date-container">
-                    <span className="booked-trips--date">08/06/2020</span>
-                    <span className="booked-trips--hours">12:00</span>
-                </div>
-                <span className="booked-trips--street">Rua KARD, 13</span>
-                <div className="booked-trips-see-details">
-                    <button className="booked-trips-see-details--button">Ver detalhes</button>
-                </div>
-            </div> */}
           </div>
       </div>
     );

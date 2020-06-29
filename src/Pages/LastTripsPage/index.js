@@ -34,54 +34,52 @@ function LastTripsPage() {
                 </div>
             </div>
         </header>
-        <table className="last-trips-table">
-            <tr className="last-trips-table-header">
-                <td className="last-trips-table-line">
-                  <img src={CalendarImage} className="last-trips-table-date" alt="date" /> 
+        {viagens.length ? 
+          <>
+          <table className="last-trips-table">
+            <thead>
+              <tr className="last-trips-table-header">
+                  <td className="last-trips-table-line">
+                    <img src={CalendarImage} className="last-trips-table-date" alt="date" /> 
+                      
+                  </td>
+                  <td className="last-trips-table-line">
+                    <img src={LocationImage} className="last-trips-table-location" alt="location" /> 
+                  </td>
+                  <td className="last-trips-table-line">
+                    <img src={PeopleImage} className="last-trips-table-passengers--number" alt="passengers quantity" /> 
                     
-                </td>
-                <td className="last-trips-table-line">
-                  <img src={LocationImage} className="last-trips-table-location" alt="location" /> 
-                </td>
-                <td className="last-trips-table-line">
-                  <img src={PeopleImage} className="last-trips-table-passengers--number" alt="passengers quantity" /> 
-                  
-                </td>
-                <td className="last-trips-table-line">
-                    <span className="last-trips-table-price">R$*</span>
-                </td>
-            </tr>
-            {viagens.length ? viagens.map(viagem => (
-                                <tr key={viagem.viagemId}>
-                                  <td className="last-trips-table-line-2">
-                                    <span style={{fontSize:14}}>{viagem.data}</span>
-                                  </td>
-                                  <td className="last-trips-table-line-2">
-                                    <span style={{fontSize:14}}>{viagem.destino}</span>
-                                  </td>
-                                  <td className="last-trips-table-line-2">
-                                    <span style={{fontSize:14}}>{viagem.qtdPessoas}</span>
-                                  </td>
-                                  <td className="last-trips-table-line-2">
-                                    <span style={{fontSize:14}}>{viagem.preco}</span>
-                                  </td>
-                                </tr>
-              )):
-                <tr>
-                  <td className="last-trips-table-line-2">
-                    <strong>Nenhuma Viagem encontrada</strong>
                   </td>
-                  <td className="last-trips-table-line-2">
+                  <td className="last-trips-table-line">
+                      <span className="last-trips-table-price">R$*</span>
                   </td>
-                  <td className="last-trips-table-line-2">
-                  </td>
-                  <td className="last-trips-table-line-2">
-                  </td>
-                </tr>
-                }    
-            {/* Aqui que vem o map */}
-        </table>
-        <span style={{fontSize:"12px"}}>*Valor estimado</span>
+              </tr>
+            </thead>
+            <tbody>
+              {viagens.map(viagem => (
+                                  <tr key={viagem.viagemId}>
+                                    <td className="last-trips-table-line-2">
+                                      <span style={{fontSize:14}}>{viagem.data}</span>
+                                    </td>
+                                    <td className="last-trips-table-line-2">
+                                      <span style={{fontSize:14}}>{viagem.destino}</span>
+                                    </td>
+                                    <td className="last-trips-table-line-2">
+                                      <span style={{fontSize:14}}>{viagem.qtdPessoas}</span>
+                                    </td>
+                                    <td className="last-trips-table-line-2">
+                                      <span style={{fontSize:14}}>{viagem.preco}</span>
+                                    </td>
+                                  </tr>
+                ))}    
+              {/* Aqui que vem o map */}
+            </tbody>
+          </table>
+          <span style={{fontSize:"12px"}}>*Valor estimado</span>
+          </>
+        : 
+          <strong style={{marginTop : "20%"}}>{viagens.error}</strong>
+        }
       </div>
     );
   }

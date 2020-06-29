@@ -54,56 +54,60 @@ function RelatorioPage() {
             </div>
         </header>
         <table className="relatorio-table">
-            <tr className="relatorio-table-header">
-                <td className="relatorio-table-line">
-                <img src={CalendarImage} className="relatorio-table-date" alt="date" /> 
+            <thead>
+                <tr className="relatorio-table-header">
+                    <td className="relatorio-table-line">
+                    <img src={CalendarImage} className="relatorio-table-date" alt="date" /> 
+                        
+                    </td>
+                    <td className="relatorio-table-line">
+                    <img src={LocationImage} className="relatorio-table-location" alt="location" /> 
+                    </td>
+                    <td className="relatorio-table-line">
+                    <img src={PeopleImage} className="relatorio-table-passengers--number" alt="passengers quantity" /> 
                     
-                </td>
-                <td className="relatorio-table-line">
-                <img src={LocationImage} className="relatorio-table-location" alt="location" /> 
-                </td>
-                <td className="relatorio-table-line">
-                <img src={PeopleImage} className="relatorio-table-passengers--number" alt="passengers quantity" /> 
-                
-                </td>
-                <td className="relatorio-table-line">
-                    <span className="relatorio-table-price">R$</span>
-                </td>
-            </tr>
-            {viagens.length ? viagens.map(viagem => (
-                                <tr>
-                                <td className="relatorio-table-line-2">
-                                    <span style={{fontSize:14}}>{viagem.data}</span>
-                                </td>
-                                <td className="relatorio-table-line-2">
-                                    <span style={{fontSize:14}}>{viagem.nomeDestino}</span>
-                                </td>
-                                <td className="relatorio-table-line-2">
-                                    <span style={{fontSize:14}}>{viagem.qtdPessoas}</span>
-                                </td>
-                                <td className="relatorio-table-line-2">
-                                    <span style={{fontSize:14}}>{viagem.preco}</span>
-                                </td>
-                                </tr>
-            )):
-                <tr>
-                <td className="relatorio-table-line-2">
-                    <strong>Nenhuma Viagem encontrada</strong>
-                </td>
-                <td className="relatorio-table-line-2">
-                </td>
-                <td className="relatorio-table-line-2">
-                </td>
-                <td className="relatorio-table-line-2">
-                </td>
+                    </td>
+                    <td className="relatorio-table-line">
+                        <span className="relatorio-table-price">R$</span>
+                    </td>
                 </tr>
-                }    
+            </thead>
+            <tbody>
+                {viagens.length ? viagens.map(viagem => (
+                                    <tr key={viagem.viagemId}>
+                                        <td className="relatorio-table-line-2">
+                                            <span style={{fontSize:14}}>{viagem.data}</span>
+                                        </td>
+                                        <td className="relatorio-table-line-2">
+                                            <span style={{fontSize:14}}>{viagem.nomeDestino}</span>
+                                        </td>
+                                        <td className="relatorio-table-line-2">
+                                            <span style={{fontSize:14}}>{viagem.qtdPessoas}</span>
+                                        </td>
+                                        <td className="relatorio-table-line-2">
+                                            <span style={{fontSize:14}}>{viagem.preco}</span>
+                                        </td>
+                                    </tr>
+                )):
+                    <tr>
+                        <td className="relatorio-table-line-2">
+                            <strong>Nenhuma Viagem encontrada</strong>
+                        </td>
+                        <td className="relatorio-table-line-2">
+                        </td>
+                        <td className="relatorio-table-line-2">
+                        </td>
+                        <td className="relatorio-table-line-2">
+                        </td>
+                    </tr>
+                    }    
+            </tbody>
         </table>
         <div className="relatorio-total-header"></div>
-            <td className="relatorio-total-item">Total de viagens ao Teatro: {viagensTeatro}</td>
-            <td className="relatorio-total-item">Total de viagens ao Aerporto: {viagensAerporto}</td>
-            <td className="relatorio-total-item">Total de viagens ao Museu: {viagensMuseu}</td>
-            <td className="relatorio-total-item">Total de viagens ao Terminal: {viagensTerminal}</td>
+            <span className="relatorio-total-item">Total de viagens ao Teatro: {viagensTeatro}</span>
+            <span className="relatorio-total-item">Total de viagens ao Aerporto: {viagensAerporto}</span>
+            <span className="relatorio-total-item">Total de viagens ao Museu: {viagensMuseu}</span>
+            <span className="relatorio-total-item">Total de viagens ao Terminal: {viagensTerminal}</span>
       </div>
     );
   }

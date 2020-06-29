@@ -23,9 +23,9 @@ function LoginForm() {
         return;
       }
       
-      history.push(`/home?tipo=${response.data.tipo}`); //aqui ele redireciona pra tela principal
       console.log(response.data);
       localStorage.setItem('user', JSON.stringify(response.data))
+      history.push('/home'); //aqui ele redireciona pra tela principal
       alert(`Bem vindo ${response.data.nome}`);
     } catch (err) {
       alert('Falha no login, tente novamente!');

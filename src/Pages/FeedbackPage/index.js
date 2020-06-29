@@ -16,6 +16,12 @@ function FeedbackForm() {
     e.preventDefault();
     console.log(subject, text);
 
+    if(subject === "" || text === "")
+    {
+      alert("Preencha os campos de forma correta!");
+      return;
+    }
+
     try {
       const response = await api.post('feedback', { subject, text });
       if(response.data.codigo !== 200 && response.data.codigo !== undefined)
@@ -29,7 +35,7 @@ function FeedbackForm() {
       // localStorage.setItem('user', JSON.stringify(response.data))
       alert(`Agradecemos o feedback!`);
     } catch (err) {
-      alert('Falha no envio, tente novamente!');
+      alert('Erro ao enviar mensagem');
     }
   }
 const { register, errors } = useForm();

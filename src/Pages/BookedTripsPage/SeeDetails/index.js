@@ -57,6 +57,7 @@ function SeeDetails() {
               </div>
           </header>
           <table className="details-table">
+            <thead>
               <tr className="details-table-header">
                   <td className="details-table-line">
                     <img src={CalendarImage} className="details-table-date" alt="date" /> 
@@ -73,7 +74,9 @@ function SeeDetails() {
                       <span className="details-table-price">R$*</span>
                   </td>
               </tr>
+            </thead>
               
+            <tbody>
               <tr className="details-table-content">
                 <td className="details-table-line-2">
                   <span style={{fontSize:14}}>{viagem.data}</span>
@@ -88,6 +91,7 @@ function SeeDetails() {
                   <span style={{fontSize:14}}>{viagem.preco}</span>
                 </td>
               </tr>
+            </tbody>
 
             </table>
             <span style={{fontSize:"12px"}}>*Valor estimado</span>
