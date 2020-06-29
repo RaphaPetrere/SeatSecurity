@@ -3,6 +3,8 @@ exports.up = function(knex) {
   return knex.schema.createTable('cartoes', function (table) {
     table.integer('numCartao').primary().notNullable();
     table.string('nomeCartao').notNullable();
+    table.integer('cvv').notNullable();
+    table.string('validade', 5).notNullable();
     table.integer('userId').notNullable();
     table.timestamp('created_at').defaultTo(knex.fn.now());
     table.timestamp('updated_at').defaultTo(knex.fn.now());

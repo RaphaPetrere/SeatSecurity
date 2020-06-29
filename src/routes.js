@@ -22,7 +22,7 @@ routes.put('/users', UserController.update);
 routes.delete('/users/:id', UserController.delete);
 
 routes.post('/cartoes', CartaoController.create);
-routes.get('/cartoes', CartaoController.list);
+routes.put('/cartoes', CartaoController.list);
 routes.delete('/cartoes/:numCartao', CartaoController.delete);
 
 // routes.post('/locais', LocaisController.create); //rota utilizada só pro desenvolvimento
@@ -31,12 +31,12 @@ routes.put('/locais', LocaisController.update); //rota utilizada só pro desenvo
 routes.delete('/locais/:localId', LocaisController.delete); //rota utilizada só pro desenvolvimento
 
 routes.post('/viagens', ViagemController.create);
-routes.get('/viagens', ViagemController.list);
+routes.put('/viagens', ViagemController.list);
 routes.delete('/viagens/:viagemId', ViagemController.delete);
 
 routes.post('/relatorio', GerenciaController.list);
 
-routes.get('/ultimasViagens', UltimasController.list);
+routes.post('/ultimasViagens', UltimasController.list);
 routes.post('/booked', BookedController.list);
 
 routes.post('/feedback', FeedbackController.create);

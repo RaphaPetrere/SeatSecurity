@@ -2,7 +2,7 @@ const connection = require('../database/connection');
 
 module.exports = {
     async list(request,response){
-        const [userId] = request.headers.authorization;
+        const {userId} = request.body;
         console.log(userId);
         const date = new Date();
         let ano = date.getFullYear();

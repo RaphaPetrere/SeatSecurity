@@ -21,7 +21,11 @@ module.exports = {
         .where('viagemId', viagemId)
         .select(['viagens.*', 'users.nome as nomeUsuario', 'users.email as emailUsuario'])
         .first();
-
+        
+        let motoristas = ["Chen", "Mateus", "Luiz", "Sunny", "Jennie", "Nako", "Mr.SM", "Yang Hyunsuk", "JYP - The Asian Soul"];
+        let numero = Math.floor(Math.random() * 10);
+        console.log(numero);
+        let escolhido = motoristas[numero];
         try
         {
             transporter.sendMail({
@@ -33,10 +37,11 @@ module.exports = {
                 Destino : ${viagem.destino}
                 Data e hora : ${viagem.data} - ${viagem.hora}
                 Quantidade de Pessoas: ${viagem.qtdPessoas}
-                Preço: ${viagem.preco}.
+                Preço: ${viagem.preco}
+                Motorista: ${escolhido}.
                 A equipe da Seat Security agradece a preferencia, faça uma boa viagem e volte sempre!`,
             }).then(message => {
-                // console.log(message);
+                console.log(message);
                 return response.json({text : `Email enviado com sucesso!`, codigo : 200}); 
             }).catch(err => {
                 console.log(err);

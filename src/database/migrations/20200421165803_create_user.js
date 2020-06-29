@@ -3,7 +3,7 @@ exports.up = function(knex) {
   return knex.schema.createTable('users', function (table) {
     table.increments('userId').primary();
     table.string('email').notNullable();
-    table.integer('cpf').notNullable();
+    table.string('cpf', 14).notNullable();
     table.specificType('senha', 'varchar(10)').notNullable();
     table.string('nome').notNullable();
     table.string('foto');
