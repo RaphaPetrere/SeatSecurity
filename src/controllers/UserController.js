@@ -22,7 +22,7 @@ module.exports = {
         const auth = crypto.randomBytes(4).toString('HEX');
 
         if(email == ""|| cpf == ""|| nome == ""|| senha == "" || rsenha == "")
-            return response.json({error : 'Preencha os campos corretamente!', codigo: 403 });
+            return response.json({error : 'Erro ao cadastrar, tente novamente!', codigo: 403 });
 
         try
         {
@@ -47,7 +47,7 @@ module.exports = {
                     nome,
                 });
         
-                return response.json({message : `Conta de nome ${nome} cadastrada com sucesso!, ${auth}`, codigo: 200 });            
+                return response.json({message : `Conta cadastrada com sucesso!`, codigo: 200 });            
             }
         } catch {
             // return response.status(403).json({error : 'Ocorreu algum erro, cheque os campos e tente novamente!'});

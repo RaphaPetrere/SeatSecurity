@@ -3,7 +3,6 @@ const connection = require('../database/connection');
 module.exports = {
     async list(request,response){
         const {userId} = request.body;
-        console.log(userId);
         const date = new Date();
         let ano = date.getFullYear();
         let mes = date.getMonth();
@@ -19,13 +18,25 @@ module.exports = {
 
         mes = mes.length == 1 ? zero.concat(mes) : mes;
         dia = dia.length == 1 ? zero.concat(dia) : dia;
-        console.log(ano, mes, dia);
+        let dataCompleta = (ano + "-" + mes + "-" + dia);
+        console.log(dataCompleta);
+        console.log(userId);
 
-        const viagens = await connection('viagens')
+        let viagens = await connection('viagens')
         .join('locais', 'locais.localId', '=', 'viagens.localId')
         .join('users', 'users.userId', '=', 'viagens.userId')
         .select(['viagens.*', 'locais.nome as nomeDestino', 'users.nome as nomeUsuario'])
-        .where('viagens.userId', userId).andWhere('data', '<=', `${ano}-${mes}-${dia}`).andWhere('hora', '<', `${horarioAtual}`);
+        .where('viagens.userId', userId).andWhere('data', '<=', `${ano}-${mes}-${dia}`);
+
+        let viagensPassadas = viagens.filter(viagem => 
+            viagem.data < dataCompleta
+            );
+
+        let viagensHoje = viagens.filter(viagem => 
+            (viagem.data === dataCompleta && viagem.hora < horarioAtual)
+            );
+            
+        viagens = viagensPassadas.concat(viagensHoje);
 
         return viagens.length == 0 ? response.json({error : "Nenhuma viagem foi encontrada!", codigo : 404}) : response.json(viagens);  
     },

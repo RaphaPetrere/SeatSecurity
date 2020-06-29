@@ -7,9 +7,9 @@ module.exports = {
         let ano = date.getFullYear();
         let mes = date.getMonth();
         let dia = date.getDate();
-        // let stringou = date.toString();
-        // let horarioAtual = stringou.slice(16, 24);
-        // console.log(horarioAtual);
+        let stringou = date.toString();
+        let horarioAtual = stringou.slice(16, 21);
+        console.log(horarioAtual);
 
         mes++;
         dia = dia.toString();
@@ -18,15 +18,25 @@ module.exports = {
 
         mes = mes.length == 1 ? zero.concat(mes) : mes;
         dia = dia.length == 1 ? zero.concat(dia) : dia;
-        // let dataCompleta = (ano + "-" + mes + "-" + dia + " ");
-        console.log(ano, mes, dia);
+        let dataCompleta = (ano + "-" + mes + "-" + dia);
+        console.log(dataCompleta);
         console.log(userId);
 
-        const viagens = await connection('viagens')
+        let viagens = await connection('viagens')
         .join('locais', 'locais.localId', '=', 'viagens.localId')
         .join('users', 'users.userId', '=', 'viagens.userId')
         .select(['viagens.*', 'locais.nome as nomeDestino', 'users.nome as nomeUsuario'])
         .where('viagens.userId', userId).andWhere('data', '>=', `${ano}-${mes}-${dia}`);
+
+        let viagensFuturas = viagens.filter(viagem => 
+            viagem.data > dataCompleta
+            );
+
+        let viagensHoje = viagens.filter(viagem => 
+            (viagem.data === dataCompleta && viagem.hora > horarioAtual)
+            );
+            
+        viagens = viagensHoje.concat(viagensFuturas);
 
         return viagens.length == 0 ? response.json({error : "Nenhuma viagem foi encontrada!", codigo : 404}) : response.json(viagens);  
     },
@@ -64,7 +74,7 @@ module.exports = {
 
             return response.json({text : 'Viagem cadastrada com sucesso'}); 
         } catch (err) {
-            return response.json({ error: `${err}`, codigo : 403 });
+            return response.json({ error: "Falha no registro, tente novamente!", codigo : 403 });
         }
     },
 
@@ -206,7 +216,7 @@ module.exports = {
             }
 
         } catch {
-            return response.json({ error: 'Ocorreu erro ao executar essa função!' , codigo : 403});
+            return response.json({ error: 'Erro ao cancelar viagem, por favor tente novamente' , codigo : 403});
         }
     },
 };

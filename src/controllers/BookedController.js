@@ -3,7 +3,7 @@ const connection = require('../database/connection');
 module.exports = {
     async list(request,response){
         const { viagemId } = request.body;
-        console.log("ViagemID:",viagemId);
+        console.log("ViagemID Booked:",viagemId);
 
         const viagem = await connection('viagens')
         .where('viagemId', viagemId);

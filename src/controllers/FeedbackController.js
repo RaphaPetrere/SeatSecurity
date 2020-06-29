@@ -28,28 +28,10 @@ module.exports = {
                 return response.json({text : `Feedback enviado com sucesso!`, codigo : 200}); 
             }).catch(err => {
                 console.log(err);
-                return response.json({ error: err, codigo : 403 });
+                return response.json({ error: "Erro ao enviar mensagem", codigo : 403 });
             })
-            // const local = await connection('locais').where('nome', nome).first();
-
-            // if(local)
-            // {
-            //     return response.status(403).json({ error: 'Local ja registrado' });
-            // }
-            // else
-            // {
-            //     await connection('locais').insert({
-            //         nome,
-            //         sigla,
-            //         endereco,
-            //         cidadeUF,
-            //         tipo
-            //     });
-        
-            //     return response.json({text : `Local ${nome} cadastrado com sucesso`}); 
-            // }
         } catch {
-            return response.status(403).json({ error: 'Preencha os campos de forma correta!' });
+            return response.json({ error: 'Preencha os campos de forma correta!', codigo : 403 });
         }
 
     },
