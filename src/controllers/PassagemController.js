@@ -22,7 +22,7 @@ module.exports = {
         .select(['viagens.*', 'users.nome as nomeUsuario', 'users.email as emailUsuario'])
         .first();
         
-        let motoristas = ["Chen", "Mateus", "Luiz", "Sunny", "Jennie", "Nako", "Mr.SM", "Yang Hyunsuk", "JYP - The Asian Soul"];
+        let motoristas = ["Felix", "Matthew", "Luiz", "Sunny", "Jennie", "Nako", "Marcos", "Johnny", "Lucas", "João"];
         let carros = [{
             veiculo : "Mercedes-Benz 413 Van", cor : "Cinza", placa : "ABC-1234"},
             {veiculo : "Ford Transit", cor : "Azul", placa : "HSS-4938"},
