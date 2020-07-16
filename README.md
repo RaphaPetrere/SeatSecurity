@@ -28,11 +28,11 @@ Após a instalação do Node, execute os seguintes comandos para verificar as ve
 ```terminal
   node -v
 ```
-recomendamos versões a partir da 12.16.3
+_recomendamos versões a partir da 12.16.3_
 ```terminal
   npm -v
 ```
-recomendamos versões a partir da 6.14.4
+_recomendamos versões a partir da 6.14.4_
 
 Se as versões se encontram nas recomendações, execute o seguinte comando para instalar as bibliotecas utilizadas:
 ```terminal
@@ -53,7 +53,7 @@ Após a instalação do Yarn, execute o seguinte comando para verificar a versã
 ```terminal
   yarn -v
 ```
-recomendamos versões a partir da 1.22.4
+_recomendamos versões a partir da 1.22.4_
 
 Se a versão se encontra nas recomendações, execute os seguintes comandos para instalar as bibliotecas utilizadas:
 ```terminal
@@ -81,7 +81,7 @@ Caso não seja possível acessar pelo celular, será necessário utilizar o modo
   
   - Para acessar o modo responsivo no Chrome, pressione F12 e clique no icone com formato de aparelhos móveis ao lado do icone de seta, ao clicar nesse icone, selecione um tipo de aparelho móvel, porquê o modo responsivo não é reconhecido pela aplicação.
   
-Agora é só utilizar a aplicação.
+Agora é necessário atualizar a pagina para utilizar a aplicação.
 
 ### Agradecimentos
 
