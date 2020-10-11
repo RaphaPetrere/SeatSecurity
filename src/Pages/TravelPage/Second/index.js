@@ -89,7 +89,7 @@ import { FiArrowLeft } from 'react-icons/fi';
     //   localId,
     // }
     localStorage.setItem('dadosViagem', JSON.stringify(dadosViagem))
-    window.location.href=`https://seatsecurity-frontend.herokuapp.com/travel/third-step?origem=${dadosViagem.origem}&destino=${dadosViagem.destino}&data=${dadosViagem.data}`
+    window.location.href=`https://seatsecurity-frontend.herokuapp.com/travel/third-step`
     // window.location.href=`http://localhost:3000/travel/third-step?origem=${dadosViagem.origem}&destino=${dadosViagem.destino}&data=${dadosViagem.data}`
   }
  
