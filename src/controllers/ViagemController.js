@@ -57,7 +57,7 @@ module.exports = {
             return response.json({ error: "Preencha todos os campos!", codigo : 403 });
 
         try{
-            let precoNFormat = qtdPessoas * 100;
+            let precoNFormat = dadosViagem.preco;
             const preco = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(precoNFormat);
             // console.log(preco);
             
